@@ -75,17 +75,32 @@ Five rules, all load-bearing:
 
 ## Workflow
 
-1. **Audit.** Grep the target file for the failure modes rather than scrolling it:
+1. **Audit — find candidates.** Grep rather than scroll:
    - near-black / near-white fills in local SVGs: `grep -oE '#[0-9a-fA-F]{6}' asset.svg | sort | uniq -c | sort -rn`
    - hardcoded generator themes: `grep -oE 'https://[^"]*theme=[^"&]*' README.md | sort -u`
    - transparent PNGs with dark subjects, screenshots, diagrams, charts
-2. **Choose** A / B / C / redesign per the table above.
-3. **Derive, never fork.** If a second variant is needed, write a script that produces it
+
+   **A grep produces candidates, never verdicts.** The decisive question is not which
+   colours appear but whether the asset has its **own background**:
+
+   ```bash
+   # a full-bleed plate? then the ink sits on it and the asset is almost certainly fine
+   grep -oE '<rect[^>]*width="(100%|[0-9]{3,})"[^>]*fill="[^"]*"' asset.svg | head -3
+   ```
+
+   **Ink on transparency fails; ink on its own plate does not.** See failure #8 — this
+   exact step produced three false positives in the session this skill came from.
+2. **Render before reporting.** Put the candidates on `#ffffff` and `#0d1117` and look.
+   Self-contained cards, photographs, and anything with a plate will survive both. Only
+   then do you have a finding.
+3. **Choose** A / B / C / redesign per the table above.
+4. **Derive, never fork.** If a second variant is needed, write a script that produces it
    from the source and commit both. Two hand-maintained copies always drift.
-4. **Verify** with `scripts/check-sanitizer.mjs` then `scripts/check-theme-swap.mjs`, then
+5. **Verify** with `scripts/check-sanitizer.mjs` then `scripts/check-theme-swap.mjs`, then
    screenshot on both canvases. See `references/verification.md`.
-5. **Sweep.** Fixing one asset and shipping is the most common half-done outcome — re-run
-   the audit greps over the whole file before calling it finished.
+6. **Sweep.** Fixing one asset and shipping is the most common half-done outcome — re-run
+   the audit over the whole file before calling it finished, applying step 2 to each
+   candidate so the sweep does not generate noise.
 
 ## Scripts
 

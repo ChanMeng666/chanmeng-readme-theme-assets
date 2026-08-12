@@ -102,8 +102,13 @@ ln -s "$PWD/readme-theme-assets-skill" ~/.claude/skills/readme-theme-assets
 Written from shipping this on a real profile README and a real logo repo, not from
 documentation. Every factual claim in `references/` is tagged **[verified]** (measured with
 the scripts here) or **[inferred]** (reasoning that was not fully testable offline), so a
-reader can tell which is which — including one claim that was inherited, repeated, and then
-found to be wrong.
+reader can tell which is which.
+
+Two of the claims that shipped here started out wrong, which is why the tagging exists and
+why failure #8 is in the gallery: one was inherited from another repo's docs, repeated, and
+then disproved by measurement; the other was a false alarm this skill's own audit step
+produced, cleared only by rendering the file. Both corrections are in the history rather
+than quietly edited away.
 
 ## License
 

@@ -1,7 +1,9 @@
 # Failure gallery and pre-ship checklist
 
-Seven real failures. All were invisible in the source; all were caught by rendering or
-grepping rather than by reading.
+Eight real failures. Seven were invisible in the source and caught by rendering. The
+eighth — **#8, the palette grep that cried wolf** — went the other way: grepping *created*
+a false alarm that only rendering could clear. Read that one first if you are auditing an
+existing README, because it is the mistake this workflow actively encourages.
 
 ---
 
@@ -33,10 +35,12 @@ there and every one of those surfaces gets a dark slab on a light page.
 
 ## 5. The half-fixed README
 
-You fixed the hero and shipped. The cover image at the bottom, the diagrams, and the
-generated stat cards still have the same bug — and they are below the fold, so nobody
-notices for months. Grep the whole file for ink colours and hardcoded `theme=` parameters
-before calling it done. This is the most common way this work ends up half-finished.
+You fixed the hero and shipped. A diagram further down, or a chart, or a transparent-PNG
+screenshot, still has the same bug — and it is below the fold, so nobody notices for
+months. Sweep the whole file before calling it done.
+
+Sweep with #8 in hand, though: the sweep produces candidates, and confirming each one by
+rendering is part of the job, not an optional extra.
 
 ## 6. The size shift
 
@@ -49,7 +53,39 @@ Technique A's standing cost is drift. If you hand-maintain both variants, they d
 usually silently, and usually noticed only when someone spots that the dark logo is a
 version behind. Derive one from the other with a committed script.
 
----
+## 8. The palette grep that cried wolf
+
+The most likely mistake **this skill will cause you to make**, so it is worth more words
+than the rest.
+
+Auditing a README, I grepped an animated cover for fills and got 9× `#070607` against 1×
+`#E2E2DF`. Near-black dominating a palette, one stray light colour: textbook ink on
+transparency. I reported it as broken, wrote it into two repos, and pushed.
+
+It was fine. The file's **first paint operation** was
+`<rect width="1280" height="640" fill="#E2E2DF"/>` — a full-bleed plate covering the whole
+canvas. The ink sat on that plate and rendered correctly in both themes. I had counted
+colour *declarations* and treated frequency as area, when the single declaration was the
+background.
+
+Two more false positives came from the same audit: a visitor-counter map pinned to
+`theme=github_dark` (NASA satellite imagery — inherently dark, self-contained, reads as a
+photograph on either canvas) and stat cards pinned to `theme=dark` (self-contained cards
+carrying their own background; a dark card on a white page is a style choice, not a
+legibility failure).
+
+The distinction the grep cannot see:
+
+> **Ink on transparency fails. Ink on its own plate does not.**
+
+So:
+
+- A palette grep, and a `theme=` grep, produce **candidates**. Never verdicts.
+- Before concluding, check for a full-bleed background:
+  `grep -oE '<rect[^>]*width="(100%|[0-9]{3,})"[^>]*fill="[^"]*"' asset.svg | head -3`
+- Then **render on both canvases and look**. It costs one screenshot.
+- Reporting a false positive is not a harmless over-report. It sends someone to "fix"
+  working assets, and if you write it down it outlives the conversation.
 
 ## Checklist
 
@@ -67,4 +103,6 @@ Before shipping a theme-aware asset:
 - [ ] If a float or a `<br clear="all">` is involved, re-checked the text wrap
 - [ ] Blank line preserved between any bare `<img>` and a following `###` heading
 - [ ] The derived variant is produced by a committed script, not hand-copied
-- [ ] Grepped the rest of the file for the same bug — ink colours, `theme=` parameters
+- [ ] Swept the rest of the file for the same bug — ink colours, `theme=` parameters
+- [ ] Every candidate the sweep produced was confirmed by RENDERING, not by its palette:
+      an asset with a full-bleed background plate is fine and must not be reported (#8)
