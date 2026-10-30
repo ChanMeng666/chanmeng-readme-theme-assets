@@ -1,5 +1,5 @@
 ---
-name: readme-theme-assets
+name: chanmeng-readme-theme-assets
 description: Use when a README, docs page, or profile page needs images that work in BOTH GitHub light and dark themes — a logo/wordmark that vanishes on dark, a diagram or chart with near-black labels on transparency, an app screenshot with a baked-in theme, a generated stat card / badge / visitor map pinned to one theme, or any animated SVG banner. Picks between the four real techniques (a `<picture>` source swap, baking a background into the asset, parameterising a generator URL, or a redesign that needs no swap), derives the second variant with a committed script instead of a hand-copy, and proves the result with GitHub's own Markdown renderer plus a two-theme browser check. Also use to audit an existing README for assets that silently fail in one theme.
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 ---

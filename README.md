@@ -1,6 +1,6 @@
 <div align="center">
 
-# readme-theme-assets-skill
+# chanmeng-readme-theme-assets
 
 **Make README images work in GitHub's light *and* dark themes — and prove it.**
 
@@ -93,8 +93,8 @@ scripts/
 ## Install
 
 ```bash
-git clone https://github.com/ChanMeng666/readme-theme-assets-skill.git
-ln -s "$PWD/readme-theme-assets-skill" ~/.claude/skills/readme-theme-assets
+git clone https://github.com/ChanMeng666/chanmeng-readme-theme-assets.git
+ln -s "$PWD/chanmeng-readme-theme-assets" ~/.claude/skills/chanmeng-readme-theme-assets
 ```
 
 ## Provenance
