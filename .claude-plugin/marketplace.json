@@ -1,0 +1,27 @@
+{
+  "name": "chanmeng-readme-theme-assets",
+  "description": "Chan Meng's chanmeng-readme-theme-assets plugin for Claude Code.",
+  "owner": {
+    "name": "Chan Meng",
+    "url": "https://github.com/ChanMeng666"
+  },
+  "plugins": [
+    {
+      "name": "chanmeng-readme-theme-assets",
+      "source": "./",
+      "description": "Claude Code skill: make README images work in GitHub light AND dark themes — four techniques, and three scripts that prove the result.",
+      "category": "documentation",
+      "tags": [
+        "accessibility",
+        "agent-skills",
+        "claude-code",
+        "claude-skill",
+        "dark-mode",
+        "documentation",
+        "github-readme",
+        "playwright",
+        "svg"
+      ]
+    }
+  ]
+}
