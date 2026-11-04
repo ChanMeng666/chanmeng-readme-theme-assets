@@ -92,6 +92,21 @@ scripts/
 
 ## Install
 
+### As a Claude Code plugin (recommended)
+
+```text
+/plugin install chanmeng-readme-theme-assets --marketplace ChanMeng666/chanmeng-readme-theme-assets
+```
+
+On Claude Code older than 2.1.275, add the marketplace first:
+
+```text
+/plugin marketplace add ChanMeng666/chanmeng-readme-theme-assets
+/plugin install chanmeng-readme-theme-assets@chanmeng-readme-theme-assets
+```
+
+### Manual install
+
 ```bash
 git clone https://github.com/ChanMeng666/chanmeng-readme-theme-assets.git
 ln -s "$PWD/chanmeng-readme-theme-assets" ~/.claude/skills/chanmeng-readme-theme-assets
