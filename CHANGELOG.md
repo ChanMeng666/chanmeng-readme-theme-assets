@@ -14,3 +14,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `/plugin install chanmeng-readme-theme-assets --marketplace ChanMeng666/chanmeng-readme-theme-assets`. The repo, marketplace, plugin and skill all
   use the name `chanmeng-readme-theme-assets`. The manual `git clone` install still works as before.
 - CI runs `claude plugin validate --strict` on the manifests.
+- A plugin icon, `.claude-plugin/icon.png`: the Chan Meng monkey on a Caldera palette colour, so catalogs show it instead of a letter.
+
