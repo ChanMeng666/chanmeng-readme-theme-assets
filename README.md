@@ -92,6 +92,14 @@ scripts/
 
 ## Install
 
+### Any agent, with the skills CLI
+
+Installs into Claude Code, Cursor, Codex, GitHub Copilot, Gemini CLI and the other agents the CLI supports. Listed on [skills.sh](https://skills.sh/chanmeng666).
+
+```bash
+npx skills add ChanMeng666/chanmeng-readme-theme-assets
+```
+
 ### As a Claude Code plugin (recommended)
 
 ```text
